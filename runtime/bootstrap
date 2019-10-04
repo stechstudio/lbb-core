@@ -1,0 +1,21 @@
+#!/opt/bin/php
+<?php declare(strict_types=1);
+putenv('APP_ROOT='.getenv('LAMBDA_TASK_ROOT').'/laravel');
+
+/**
+ * We ensure this is turned on so that errors will be printed to
+ * stderr, which will ultimately put them the Cloudwatch Logs for
+ * the Lambda Function.
+ */
+ini_set('display_errors', 1);
+
+/**
+ * We ensure that All errors and warnings will be reported, and
+ * thus logged in the Cloudwatch Logs.
+ */
+error_reporting(E_ALL);
+
+require_once(getenv('APP_ROOT').'/vendor/autoload.php');
+fwrite(STDERR, 'Included Composer Autoload');
+
+\Sts\Llb\Runtime\VaporRuntime::handle();
