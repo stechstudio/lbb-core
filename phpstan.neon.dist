@@ -1,0 +1,8 @@
+parameters:
+    level: 5
+    paths:
+        - src
+    ignoreErrors:
+        # Ignore Laravel Magic Call
+        - '#Call to static method debug\(\) on an unknown class STS\\LBB\\Lambda\\Log.#'
+        - '#Call to static method error\(\) on an unknown class STS\\LBB\\Lambda\\Log.#'
