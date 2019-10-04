@@ -1,0 +1,56 @@
+{
+  "name": "stechstudio/llb-core",
+  "description": "Lambda Layer bootstrap, kernal, and invocation handlers for Laravel Bref Bridge",
+  "keywords": [
+    "laravel",
+    "lambda",
+    "dispatch",
+    "bref"
+  ],
+  "homepage": "https://github.com/stechstudio/llb-core",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Bubba",
+      "email": "rob@stechstudio.com"
+    }
+  ],
+  "require": {
+    "php": "^7.3",
+    "laravel/framework": "^6.1",
+    "laravel/vapor-core": "^2.0",
+    "stechstudio/aws-events": "^1.1"
+  },
+  "require-dev": {
+    "mockery/mockery": "^1.2",
+    "orchestra/testbench": "^4.0",
+    "phpstan/phpstan": "^0.11.16",
+    "phpunit/phpunit": "^8.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "STS\\LBB\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Sts\\LBB\\Tests\\": "tests"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Sts\\LBB\\LambdaServiceProvider"
+      ]
+    }
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
