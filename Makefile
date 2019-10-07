@@ -1,22 +1,24 @@
 TESTS?=tests
 SHELL = /bin/bash
 
-filter:
-	vendor/bin/phpunit --dump-xdebug-filter storage/coverage-report/xdebug-filter.php
+filter: coverage-dir
+	vendor/bin/phpunit --dump-xdebug-filter coverage/xdebug-filter.php
 
 stan:
-	rm -f /tmp/phpstan.html
-	echo '<html><body><pre><code>' > /tmp/phpstan.html
-	-vendor/bin/phpstan analyse --error-format=prettyJson >> /tmp/phpstan.html
-	echo '</code></pre></body></html>' >> /tmp/phpstan.html
+	rm -f coverage/phpstan.html
+	echo '<html><body><pre><code>' > coverage/phpstan.html
+	-vendor/bin/phpstan analyse --error-format=prettyJson >> coverage/phpstan.html
+	echo '</code></pre></body></html>' >> coverage/phpstan.html
 	open /tmp/phpstan.html
 
 test: clear keys
 	vendor/bin/phpunit --testsuite all --testdox --stop-on-failure
 
-test-coverage:
-	mkdir -p storage/coverage-report
-	-vendor/bin/phpunit --prepend storage/coverage-report/xdebug-filter.php --coverage-html /tmp/coverage-report
-	open /tmp/coverage-report/index.html
+test-coverage: coverage-dir
+	-vendor/bin/phpunit --prepend coverage/xdebug-filter.php --coverage-html coverage/coverage-report
+	open coverage/index.html
 
 pr: stan test-coverage
+
+coverage-dir:
+	mkdir -p coverage/coverage-report
