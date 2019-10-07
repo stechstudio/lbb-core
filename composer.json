@@ -1,5 +1,5 @@
 {
-  "name": "stechstudio/llb-core",
+  "name": "stechstudio/lbb-core",
   "description": "Lambda Layer bootstrap, kernal, and invocation handlers for Laravel Bref Bridge",
   "keywords": [
     "laravel",
@@ -33,6 +33,9 @@
       "STS\\LBB\\": "src"
     }
   },
+  "bin": [
+    "runtime/bootstrap"
+  ],
   "autoload-dev": {
     "psr-4": {
       "Sts\\LBB\\Tests\\": "tests"
