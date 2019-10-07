@@ -3,9 +3,11 @@
 namespace STS\LBB\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use STS\AwsEvents\Contracts\Eventful;
 use STS\LBB\Lambda\Application as LambdaApplication;
 use STS\LBB\Lambda\Contracts\Application as LambdaApplicationContract;
 use STS\LBB\Lambda\Contracts\Registrar;
+use STS\LBB\Lambda\Models\Context;
 use STS\LBB\Lambda\Router;
 
 
@@ -27,6 +29,8 @@ class LbbServiceProvider extends ServiceProvider
 
     public function register(): void
     {
+        $this->app->alias(Eventful::class, 'lbb.lambda.events');
+        $this->app->alias(Context::class, 'lbb.lambda.context');
         $this->app->singleton(
             LambdaApplicationContract::class,
             LambdaApplication::class
@@ -40,7 +44,7 @@ class LbbServiceProvider extends ServiceProvider
             LambdaApplicationContract::class,
             'lbb.application'
         );
-        
+
         $this->app->singleton(Registrar::class, Router::class);
         $this->app->alias(
             Registrar::class,
