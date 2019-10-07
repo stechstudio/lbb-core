@@ -17,6 +17,6 @@ class Event extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return 'lbb.lambda.events's;
+        return 'lbb.lambda.events';
     }
 }

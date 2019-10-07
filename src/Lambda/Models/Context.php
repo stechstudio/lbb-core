@@ -4,7 +4,7 @@ namespace STS\LBB\Lambda\Models;
 
 use Illuminate\Support\Collection;
 use STS\AwsEvents\Contexts\Context as AwsEventsContext;
-use function env;
+use function config;
 use function strtolower;
 
 class Context extends AwsEventsContext
@@ -14,13 +14,12 @@ class Context extends AwsEventsContext
         $contextCollection = new Collection($arrayContext);
         $context           = new static;
 
-        $context->setFunctionName(env('AWS_LAMBDA_FUNCTION_NAME', ''));
-        $context->setFunctionVersion(env('AWS_LAMBDA_FUNCTION_VERSION', ''));
-        $context->setLogGroupName(env('AWS_LAMBDA_LOG_GROUP_NAME', ''));
-        $context->setLogStreamName(env('AWS_LAMBDA_LOG_STREAM_NAME', ''));
+        $context->setFunctionName(config('lbb.function.name'));
+        $context->setFunctionVersion(config('lbb.function.version'));
+        $context->setLogGroupName(config('lbb.logging.group'));
+        $context->setLogStreamName(config('lbb.logging.stream'));
 
-        $context->setMemoryLimitInMb(env('AWS_LAMBDA_FUNCTION_MEMORY_SIZE',
-            ''));
+        $context->setMemoryLimitInMb(config('lbb.logging.memory_limit', ''));
         $context->setInvokedFunctionArn($contextCollection->get(strtolower('Lambda-Runtime-Invoked-Function-Arn'),
             ''));
         $context->setAwsRequestId($contextCollection->get('lambda-runtime-aws-request-id',
