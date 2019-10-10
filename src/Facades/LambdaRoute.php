@@ -2,6 +2,8 @@
 
 namespace STS\LBB\Facades;
 
+use Illuminate\Support\Facades\Facade;
+
 /**
  * @method static array dispatch(Event $event, Context $context)
  * @method static bool hasController(string $eventName)
