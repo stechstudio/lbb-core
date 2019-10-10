@@ -44,7 +44,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Sts\\LBB\\LambdaServiceProvider"
+        "STS\\LBB\\Providers\\LbbServiceProvider"
       ]
     }
   },
