@@ -7,7 +7,7 @@ putenv('APP_ROOT='.getenv('LAMBDA_TASK_ROOT').'/laravel');
  * stderr, which will ultimately put them the Cloudwatch Logs for
  * the Lambda Function.
  */
-ini_set('display_errors', 1);
+ini_set('display_errors', '1');
 
 /**
  * We ensure that All errors and warnings will be reported, and
