@@ -51,6 +51,7 @@ class VaporRuntime
     */
     public static function handleSsmSecrets(): void
     {
+        self::$secrets = [];
         if (key_exists('VAPOR_SSM_PATH', $_ENV)) {
             self::$secrets = Secrets::addToEnvironment(
                 $_ENV['VAPOR_SSM_PATH'],
