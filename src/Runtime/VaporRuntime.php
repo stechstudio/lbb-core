@@ -14,6 +14,7 @@ use STS\AwsEvents\Events\Event;
 use STS\LBB\Lambda\Models\Context;
 use STS\LBB\Lambda\Runtime;
 use function fwrite;
+use function key_exists;
 use const STDERR;
 
 class VaporRuntime
@@ -50,11 +51,13 @@ class VaporRuntime
     */
     public static function handleSsmSecrets(): void
     {
-        self::$secrets = Secrets::addToEnvironment(
-            $_ENV['VAPOR_SSM_PATH'],
-            json_decode($_ENV['VAPOR_SSM_VARIABLES'] ?? '[]', true),
-            getenv('APP_ROOT').'/vaporSecrets.php'
-        );
+        if (key_exists('VAPOR_SSM_PATH', $_ENV)) {
+            self::$secrets = Secrets::addToEnvironment(
+                $_ENV['VAPOR_SSM_PATH'],
+                json_decode($_ENV['VAPOR_SSM_VARIABLES'] ?? '[]', true),
+                getenv('APP_ROOT').'/vaporSecrets.php'
+            );
+        };
     }
 
     /*
