@@ -74,7 +74,9 @@ class VaporRuntime
     {
         fwrite(STDERR, 'Preparing to boot FPM');
         self::$fpm = Fpm::boot(
-            getenv('APP_ROOT').'/httpHandler.php', self::$secrets
+            getenv('APP_ROOT')
+            .'/vendor/laravel/vapor-core/stubs/httpHandler.php',
+            self::$secrets
         );
         fwrite(STDERR, 'Booted FPM');
     }
