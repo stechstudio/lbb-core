@@ -5,7 +5,6 @@ namespace STS\LBB\Lambda\Controllers;
 use Illuminate\Queue\WorkerOptions;
 use InvalidArgumentException;
 use Laravel\Vapor\Queue\VaporJob;
-use Laravel\Vapor\Queue\VaporWorker as VaporWorkerBase;
 use STS\AwsEvents\Events\Event;
 use STS\LBB\Lambda\Models\Context;
 use function app;
@@ -19,17 +18,12 @@ class VaporWorker
 {
 
     /**
-     * @var VaporWorker
-     */
-    private $worker;
-    /**
      * @var \Illuminate\Container\Container
      */
     private $laravel;
 
-    public function __construct(VaporWorkerBase $worker)
+    public function __construct()
     {
-        $this->worker  = $worker;
         $this->laravel = app();
     }
 
@@ -37,7 +31,7 @@ class VaporWorker
     {
         $job = $event->get('Records')->first()->get('body');
 
-        return $this->worker->runVaporJob(
+        return $this->laravel->make('command.vapor.work')->runVaporJob(
             $this->marshalJob($job),
             'sqs',
             $this->gatherWorkerOptions()
