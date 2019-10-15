@@ -2,8 +2,8 @@
 
 namespace STS\LBB\Providers;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
-use Laravel\Vapor\Arr;
 use STS\AwsEvents\Contracts\Eventful;
 use STS\LBB\Lambda\Application as LambdaApplication;
 use STS\LBB\Lambda\Contracts\Application as LambdaApplicationContract;
