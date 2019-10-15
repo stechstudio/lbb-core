@@ -3,8 +3,11 @@
 $appRoot = getenv('LAMBDA_TASK_ROOT')
     ? getenv('LAMBDA_TASK_ROOT').'/laravel'
     : realpath(__DIR__.'/../');
-
 putenv('APP_ROOT='.$appRoot);
+
+if (getenv('APP_CONFIG_CACHE') === false){
+  putenv('APP_CONFIG_CACHE=/tmp/storage/bootstrap/cache');
+}
 
 /**
  * We ensure this is turned on so that errors will be printed to
