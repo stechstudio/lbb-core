@@ -1,6 +1,10 @@
 #!/opt/bin/php
 <?php declare(strict_types=1);
-putenv('APP_ROOT='.getenv('LAMBDA_TASK_ROOT').'/laravel');
+$appRoot = getenv('LAMBDA_TASK_ROOT')
+    ? getenv('LAMBDA_TASK_ROOT').'/laravel'
+    : realpath(__DIR__.'/../');
+
+putenv('APP_ROOT='.$appRoot);
 
 /**
  * We ensure this is turned on so that errors will be printed to
@@ -18,4 +22,4 @@ error_reporting(E_ALL);
 require_once(getenv('APP_ROOT').'/vendor/autoload.php');
 fwrite(STDERR, 'Included Composer Autoload');
 
-\Sts\Llb\Runtime\VaporRuntime::handle();
+\STS\LBB\Runtime\VaporRuntime::handle();
