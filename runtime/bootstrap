@@ -6,7 +6,7 @@ $appRoot = getenv('LAMBDA_TASK_ROOT')
 putenv('APP_ROOT='.$appRoot);
 
 if (getenv('APP_CONFIG_CACHE') === false){
-  putenv('APP_CONFIG_CACHE=/tmp/storage/bootstrap/cache');
+  putenv('APP_CONFIG_CACHE=/tmp/storage/bootstrap/cache/config.php');
 }
 
 /**
